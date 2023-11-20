@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        HStack{
+        HStack {
             cardView(isFaceUp: true)
             cardView()
             cardView()
@@ -19,24 +19,25 @@ struct ContentView: View {
     }
 }
 
-struct cardView: View{
-    var isFaceUp : Bool = false
-    var body: some View{
-        
-        if isFaceUp{
-            ZStack(content: {
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.white)
-                RoundedRectangle(cornerRadius: 12)
-                    .strokeBorder(lineWidth: 2)
+struct cardView: View {
+   @State var isFaceUp: Bool = true
+    var body: some View {
+        ZStack {
+            let base: RoundedRectangle = .init(cornerRadius: 12)
+            if isFaceUp {
+                base.fill(.white)
+                base.strokeBorder(lineWidth: 2)
                 Text("👻").font(.largeTitle)
-            })
-        }else
-        {
-            RoundedRectangle(cornerRadius: 12)
+            }
+            else {
+               
+                base.fill()
+            }
+            
+        }.onTapGesture {
+            
+            isFaceUp.toggle()
         }
-       
-        
     }
 }
 
